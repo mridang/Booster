@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="booster" default="jar" basedir=".">
+
+    <!-- Globals -->
+    <property name="src.dir" location="src"/>
+    <property name="build.dir" location="build"/>
+    <property name="jar.dir" location="jar"/>
+    <property name="res.dir" location="res"/>
+    <property name="cli.dir" value="clibooster"/>
+    <property name="aze.dir" value="azebooster"/>
+    <property name="main-class" value="clibooster.CliBoosterCommand"/>
+
+    <!-- Paths -->
+    <path id="classpath">
+        <fileset dir="." includes="**/*.jar"/>
+    </path>
+
+    <!-- Start it -->
+    <target name="init">
+        <tstamp/>
+        <mkdir dir="${build.dir}"/>
+        <mkdir dir="${jar.dir}"/>
+        <mkdir dir="${build.dir}\${aze.dir}"/>
+        <mkdir dir="${jar.dir}\${aze.dir}"/>
+        <mkdir dir="${build.dir}\${cli.dir}"/>
+        <mkdir dir="${jar.dir}\${cli.dir}"/>
+    </target>
+
+    <!-- Build it -->
+    <target name="compile" depends="init">
+        <javac srcdir="${src.dir}/${cli.dir}" destdir="${build.dir}/${cli.dir}" includeantruntime="false">
+            <classpath>
+                <path refid="classpath"/>
+            </classpath>
+        </javac>
+        <javac srcdir="${src.dir}/${aze.dir}" destdir="${build.dir}/${aze.dir}" includeantruntime="false">
+            <classpath>
+                <path refid="classpath"/>
+            </classpath>
+        </javac>
+    </target>
+
+    <!-- Jar it -->
+    <target name="jar" depends="compile">
+        <jar destfile="${jar.dir}/${cli.dir}/cli${ant.project.name}.jar">
+            <fileset dir="${build.dir}/${cli.dir}"/>
+            <fileset dir="${res.dir}/${cli.dir}" />
+            <manifest>
+                <attribute name="Main-Class" value="${main-class}"/>
+            </manifest>
+        </jar>
+        <jar destfile="${jar.dir}/${aze.dir}/aze${ant.project.name}.jar">
+            <fileset dir="${build.dir}/${aze.dir}"/>
+            <fileset dir="${res.dir}/${aze.dir}" />
+        </jar>
+    </target>
+
+    <!-- Run it -->
+    <target name="run" depends="jar">
+        <java fork="true" classname="${main-class}">
+            <classpath>
+                <path refid="classpath"/>
+                <path location="${jar.cli.dir}/cli${ant.project.name}.jar"/>
+            </classpath>
+        </java>
+    </target>
+
+    <!-- Clean it -->
+    <target name="clean" description="clean up" >
+        <tstamp/>
+        <delete dir="${build.dir}/${aze.dir}"/>
+        <delete dir="${jar.dir}/${aze.dir}"/>
+        <delete dir="${build.dir}/${cli.dir}"/>
+        <delete dir="${jar.dir}/${cli.dir}"/>
+        <delete dir="${build.dir}"/>
+        <delete dir="${jar.dir}"/>
+    </target>
+
+</project>
