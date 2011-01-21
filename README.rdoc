@@ -1,0 +1,92 @@
+= Booster
+
+Copyright (c) 2010 Mridang Agarwalla
+
+A Vuze plugin and a Java CLI application to add more trackers to a torrent.
+
+Private trackers are great due the blistering speeds one gets, but, with public
+trackers the lack of seeders often gives you slow downloads. When you use
+Booster, it will populate your torrents with a multitude of trackers so you
+get more peers which in turn means more speeds.
+
+== Builiding
+
+Follow these steps for initiating a build:
+
+1. From the command line, change into the application directory
+2. Download and place the dependencies in the same folder
+3. To start the build process, type "ant compile".
+
+When the build is finished, there are several resulting items:
+
+* build  Directory containing the newly compiled files
+* jar    Directory containing the newly compiled files packaged in the a JAR
+
+It's also possible to run various parts of the build separately. For a list of 
+available targets, type "ant" on the command line.
+
+* Note: It is currently not possible to build the CLI version and the Plugin
+version separately. *
+
+== Usage
+
+=== CLI Version
+
+Fire up your shell, navigate to the directory containing Booster and type:
+
+  clibooster <path to torrent file> 
+
+This will add the list of trackers to the torrent file.
+
+=== Plugin Version
+
+Installing the plugin into Vuze/Azereus requires a couple of steps. For a 
+thorough explanation please visit the Vuze wiki at: 
+
+http://wiki.vuze.com/w/Install_Plugins 
+
+== Dependencies
+
+=== Plugin Version
+
+* When you write your plugin, you will need to compile against the Azureus code 
+  itself, which is provided in a single JAR file. You need to use either the 
+  main Azureus2.jar file or a JAR file containing just the interfaces which 
+  make up the plugin API (both of which are available from: 
+  
+  http://sourceforge.net/projects/azureus/files/
+
+=== CLI Version
+
+None
+
+== Configuration
+
+None
+
+== TODO
+
+This is beta software. Several things are on the todo list. if you'd like to see
+a new feature, please help by contributing.
+
+== Contributing
+
+Pull requests will be ignored if they don't follow the Git convention of
+a 50 character or less subject and optional paragraphs wrapped to 72
+characters.
+
+If I provide you with feedback on your pull request, generally you should
+squash your changes into the previous commit when submitting a second request.
+
+== License
+
+This program is released under the GNU GPL.
+
+== Contact
+
+Feel free to request new features or provide bug reports.
+You can find my email address here.
+
+== Disclaimer
+
+No warranties, expressed or implied.
